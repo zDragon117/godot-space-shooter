@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://doadycwe7h30j"]
+
+[ext_resource type="Texture2D" uid="uid://c1518wbja6dd" path="res://assets/textures/spaceShips_001.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://chyy35kxttb64" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="FontFile" uid="uid://bhr2rhqo8dmnd" path="res://assets/fonts/Kenney Future.ttf" id="3_4ra3w"]
+
+[node name="Enemy" type="Area2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_md0e3")
+hp = 2
+points = 200
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_7p1mj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.65, 0.65)
+polygon = PackedVector2Array(-14, -37, -40, -30, -53, 18, -31, 40, -22, 37, -23.0769, 29.2308, -16, 4, -7.69231, 24.6154, 7.69231, 24.6154, 15, 2, 23.0769, 27.6923, 22, 36, 29, 40, 53, 18, 40, -29, 15, -36, 11, -31, -11, -31)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -44)
+scale = Vector2(0.7, 0.75)
+
+[node name="TextHp" type="Label" parent="."]
+offset_left = 18.0
+offset_top = -41.0
+offset_right = 26.0
+offset_bottom = -23.0
+theme_override_fonts/font = ExtResource("3_4ra3w")
+theme_override_font_sizes/font_size = 16
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
